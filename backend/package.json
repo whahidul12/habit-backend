@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --env-file=.env server.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node --env-file=.env scripts/seed.js"
   },
   "keywords": [],
   "author": "Whahidul Islam",

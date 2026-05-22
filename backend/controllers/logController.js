@@ -59,7 +59,7 @@ export const getToday = async (req, res) => {
 
 export const getRange = async (req, res) => {
   try {
-    const { start, end } = req.body;
+    const { start, end } = req.query;
     const logs = await HabitsLog.find({
       userId: req.user._id,
       completedDate: { $gte: start, $lte: end },
@@ -158,13 +158,14 @@ export const getAllStats = async (req, res) => {
         habitId: h._id,
         name: h.name,
         icon: h.icon,
+        color: h.color,
         category: h.category,
         completions30d: hLogs.length,
         currentStreak: current,
         longestStreak: longest,
       };
     });
-    res.json({ preHabit, days });
+    res.json({ perHabit: preHabit, days });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
