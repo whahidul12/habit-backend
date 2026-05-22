@@ -62,7 +62,7 @@ export const getRange = async (req, res) => {
     const { start, end } = req.body;
     const logs = await HabitsLog.find({
       userId: req.user._id,
-      completedDate: { $gte: startOfDay, $lte: end },
+      completedDate: { $gte: start, $lte: end },
     });
     res.json(logs);
   } catch (err) {
@@ -93,6 +93,11 @@ export const getHabitStats = async (req, res) => {
   try {
     const habit = await Habits.findOne({
       _id: req.params.habitId,
+      userId: req.user._id,
+    }).sort({ completedDate: -1 });
+
+    const logs = await HabitsLog.find({
+      userId: req.user._id,
       habitId: habit._id,
     }).sort({ completedDate: -1 });
 
@@ -117,10 +122,10 @@ export const getHabitStats = async (req, res) => {
 
     res.json({
       habit,
-      totalCompletions: llogs.length,
+      totalCompletions: logs.length,
       currentStreak: current,
       longestStreak: longest,
-      completionRate,
+      completedDate,
       monthly,
     });
   } catch (err) {
@@ -154,7 +159,7 @@ export const getAllStats = async (req, res) => {
         name: h.name,
         icon: h.icon,
         category: h.category,
-        completetions30d: hLogs.length,
+        completions30d: hLogs.length,
         currentStreak: current,
         longestStreak: longest,
       };
