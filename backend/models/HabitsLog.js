@@ -10,7 +10,7 @@ const HabitLogSchema = new mongoose.Schema(
     },
     habitId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Habits",
+      ref: "Habit",
       required: true,
       index: true,
     },

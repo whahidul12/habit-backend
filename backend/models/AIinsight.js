@@ -15,7 +15,7 @@ const aiInsightSchema = new mongoose.Schema(
         },
         content: { type: String, required: true },
         meta: { type: mongoose.Schema.Types.Mixed, default: {} },
-        generatedAt: { type: Date, default: Date.now() },
+        generatedAt: { type: Date, default: Date.now },
     },
     { timestamps: true },
 );

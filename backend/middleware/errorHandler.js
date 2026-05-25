@@ -3,7 +3,7 @@ export const notFound = (req, res, next) => {
 }
 
 export const errorHandler = (err, req, res, next) => {
-    console.error(err);
+    console.error(err); //production er jonn file e add korte hobe
     const status = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
     res.status(status).json({
         message: err.message || "Server Error",
