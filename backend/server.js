@@ -6,6 +6,8 @@ import habitRoutes from "./routes/habits.js";
 import logsRoutes from "./routes/logs.js";
 import aiRoutes from "./routes/ai.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const app = express();
 
